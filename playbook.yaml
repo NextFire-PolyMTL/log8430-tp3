@@ -1,0 +1,9 @@
+---
+- name: Setup Environment
+  hosts: all
+  tasks:
+    - name: Install Docker
+      become: true
+      community.general.snap:
+        name:
+          - docker
