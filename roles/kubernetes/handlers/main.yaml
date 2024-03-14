@@ -1,8 +1,0 @@
----
-- name: Install helm-diff plugin
-  kubernetes.core.helm_plugin:
-    plugin_path: https://github.com/databus23/helm-diff
-
-- name: Install kubernetes module
-  ansible.builtin.pip:
-    name: kubernetes

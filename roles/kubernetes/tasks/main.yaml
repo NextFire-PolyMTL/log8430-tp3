@@ -14,8 +14,10 @@
   community.general.snap:
     classic: true
     name: helm
-  notify:
-    - Install helm-diff plugin
+
+- name: Install helm-diff plugin
+  kubernetes.core.helm_plugin:
+    plugin_path: https://github.com/databus23/helm-diff
 
 - name: Install Python
   ansible.builtin.apt:
@@ -23,5 +25,7 @@
     name:
       - python3
       - python3-pip
-  notify:
-    - Install kubernetes module
+
+- name: Install kubernetes module
+  ansible.builtin.pip:
+    name: kubernetes
