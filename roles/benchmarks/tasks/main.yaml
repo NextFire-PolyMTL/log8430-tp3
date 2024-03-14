@@ -1,7 +1,19 @@
 ---
+- name: Delete previous namespaces
+  kubernetes.core.k8s:
+    api_version: v1
+    kind: Namespace
+    name: "{{ item }}"
+    state: absent
+    wait: true
+  loop: "{{ deployments.roles }}"
+
 - name: Include tasks - benchmark
+  vars:
+    role: "{{ item.1 }}"
+    replicas: "{{ item.0 }}"
   ansible.builtin.include_tasks:
     file: benchmark.yaml
-  loop: "{{ deployments.roles }}"
-  loop_control:
-    loop_var: role
+  with_community.general.cartesian:
+    - "{{ deployments.replicas }}"
+    - "{{ deployments.roles }}"

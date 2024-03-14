@@ -5,5 +5,4 @@
 
 - name: Install kubernetes module
   ansible.builtin.pip:
-    name:
-      - kubernetes
+    name: kubernetes

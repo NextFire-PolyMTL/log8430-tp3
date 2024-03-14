@@ -11,4 +11,4 @@
     wait: true
     values: "{{ lookup('file', 'values.yaml') | from_yaml }}"
     set_values:
-      - value: replica.replicaCount={{ replicas - 1 }}
+      - value: replica.replicaCount={{ (replicas | int) - 1 }}

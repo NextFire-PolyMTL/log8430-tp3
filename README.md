@@ -12,6 +12,12 @@
 vagrant up
 ```
 
+Run benchmarks:
+
+```sh
+vagrant provision --provision-with benchmarks
+```
+
 ## References
 
 - https://github.com/bitnami/charts/tree/ee3e73141888213cc2d9644c0a4de3c6114f2836/bitnami/mongodb

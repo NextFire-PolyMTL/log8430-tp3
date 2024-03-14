@@ -78,8 +78,22 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-  config.vm.provision "ansible" do |ansible|
+
+  config.vm.provision "setup", type: "ansible" do |ansible|
     ansible.playbook = "playbook.yaml"
     ansible.raw_arguments = ["--diff"]
+
+    ansible.groups = {
+      "setup" => ["default"],
+    }
+  end
+
+  config.vm.provision "benchmarks", type: "ansible", run: "never" do |ansible|
+    ansible.playbook = "playbook.yaml"
+    ansible.raw_arguments = ["--diff"]
+
+    ansible.groups = {
+      "benchmarks" => ["default"],
+    }
   end
 end
