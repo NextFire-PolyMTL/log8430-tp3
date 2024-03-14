@@ -1,0 +1,15 @@
+---
+- name: Benchmark {{ role }}
+  block:
+    - name: Import role - {{ role }}
+      ansible.builtin.import_role:
+        name: "{{ role }}"
+  always:
+    - name: Delete namespace
+      kubernetes.core.k8s:
+        api_version: v1
+        kind: Namespace
+        name: "{{ role }}"
+        state: absent
+        wait: true
+      when: cleanup_namespace

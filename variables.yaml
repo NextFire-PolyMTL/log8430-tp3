@@ -1,0 +1,10 @@
+deployments:
+  roles:
+    - mongodb
+    - redis
+  replicas:
+    - 3
+    - 5
+    - 7
+
+cleanup_namespace: true

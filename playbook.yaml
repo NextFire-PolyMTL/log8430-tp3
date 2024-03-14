@@ -1,9 +1,20 @@
 ---
 - name: Setup Environment
   hosts: all
+  become: true
+  roles:
+    - kubernetes
+
+- name: Run Experiment
+  hosts: all
+  vars_files:
+    - variables.yaml
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
-    - name: Install Docker
-      become: true
-      community.general.snap:
-        name:
-          - docker
+    - name: Include role - benchmarks
+      ansible.builtin.include_role:
+        name: benchmarks
+      loop: "{{ deployments.replicas }}"
+      loop_control:
+        loop_var: replicas

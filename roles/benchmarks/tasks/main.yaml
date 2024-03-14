@@ -1,0 +1,7 @@
+---
+- name: Include tasks - benchmark
+  ansible.builtin.include_tasks:
+    file: benchmark.yaml
+  loop: "{{ deployments.roles }}"
+  loop_control:
+    loop_var: role

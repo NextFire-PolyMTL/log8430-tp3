@@ -1,0 +1,14 @@
+---
+- name: Install Redis - replicas={{ replicas }}
+  kubernetes.core.helm:
+    chart_ref: oci://registry-1.docker.io/bitnamicharts/redis
+    chart_version: 18.19.2
+    release_name: redis
+    release_namespace: redis
+    create_namespace: true
+    force: true
+    atomic: true
+    wait: true
+    values: "{{ lookup('file', 'values.yaml') | from_yaml }}"
+    set_values:
+      - value: replica.replicaCount={{ replicas - 1 }}

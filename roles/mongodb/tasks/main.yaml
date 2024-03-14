@@ -1,0 +1,14 @@
+---
+- name: Install MongoDB - replicas={{ replicas }}
+  kubernetes.core.helm:
+    chart_ref: oci://registry-1.docker.io/bitnamicharts/mongodb
+    chart_version: 14.13.0
+    release_name: mongodb
+    release_namespace: mongodb
+    create_namespace: true
+    force: true
+    atomic: true
+    wait: true
+    values: "{{ lookup('file', 'values.yaml') | from_yaml }}"
+    set_values:
+      - value: replicaCount={{ replicas }}

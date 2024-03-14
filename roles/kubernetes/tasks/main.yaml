@@ -1,0 +1,28 @@
+---
+- name: Fetch K3s install script
+  ansible.builtin.get_url:
+    url: https://get.k3s.io
+    dest: /var/tmp/k3s-install.sh
+    mode: "0755"
+
+- name: Install K3s
+  ansible.builtin.command:
+    cmd: /var/tmp/k3s-install.sh --write-kubeconfig-mode 644
+    creates: /usr/local/bin/k3s
+
+- name: Install Helm
+  community.general.snap:
+    classic: true
+    name:
+      - helm
+  notify:
+    - Install helm-diff plugin
+
+- name: Install Python
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - python3
+      - python3-pip
+  notify:
+    - Install kubernetes module
