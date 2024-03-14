@@ -1,4 +1,8 @@
 architecture: replicaset
+
 auth:
   rootUser: root
   rootPassword: password
+
+persistence:
+  enabled: false

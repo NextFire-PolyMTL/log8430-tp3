@@ -1,3 +1,12 @@
 architecture: replication
+
 auth:
   password: password
+
+master:
+  persistence:
+    enabled: false
+
+replica:
+  persistence:
+    enabled: false

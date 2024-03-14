@@ -7,7 +7,7 @@
 
 - name: Install K3s
   ansible.builtin.command:
-    cmd: /var/tmp/k3s-install.sh --write-kubeconfig-mode 644
+    cmd: /var/tmp/k3s-install.sh --write-kubeconfig-mode 644 --disable servicelb,traefik,local-storage,metrics-server
     creates: /usr/local/bin/k3s
 
 - name: Install Helm
