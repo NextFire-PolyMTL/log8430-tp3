@@ -1,0 +1,15 @@
+---
+- name: Build ycsb image
+  community.docker.docker_image:
+    name: ycsb
+    tag: "1"
+    force_tag: true
+    source: build
+    build:
+      path: ~/ycsb
+    archive_path: ~/ycsb.tar
+
+- name: Import image into K3s
+  ansible.builtin.command:
+    cmd: "ctr images import ~/ycsb.tar"
+  changed_when: true

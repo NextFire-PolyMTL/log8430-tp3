@@ -81,19 +81,11 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "setup", type: "ansible" do |ansible|
     ansible.playbook = "playbook.yaml"
-    ansible.raw_arguments = ["--diff"]
-
-    ansible.groups = {
-      "setup" => ["default"],
-    }
+    ansible.tags = ["setup"]
   end
 
   config.vm.provision "benchmarks", type: "ansible", run: "never" do |ansible|
     ansible.playbook = "playbook.yaml"
-    ansible.raw_arguments = ["--diff"]
-
-    ansible.groups = {
-      "benchmarks" => ["default"],
-    }
+    ansible.tags = ["benchmarks"]
   end
 end

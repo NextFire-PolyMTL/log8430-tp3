@@ -1,4 +1,15 @@
 ---
+- name: Fetch Docker install script
+  ansible.builtin.get_url:
+    url: https://get.docker.com
+    dest: /var/tmp/docker-install.sh
+    mode: "0755"
+
+- name: Install Docker
+  ansible.builtin.command:
+    cmd: /var/tmp/docker-install.sh
+    creates: /usr/bin/docker
+
 - name: Fetch K3s install script
   ansible.builtin.get_url:
     url: https://get.k3s.io
@@ -7,7 +18,7 @@
 
 - name: Install K3s
   ansible.builtin.command:
-    cmd: /var/tmp/k3s-install.sh --write-kubeconfig-mode 644 --disable servicelb,traefik,local-storage,metrics-server
+    cmd: /var/tmp/k3s-install.sh --disable servicelb,traefik,local-storage,metrics-server
     creates: /usr/local/bin/k3s
 
 - name: Install Helm

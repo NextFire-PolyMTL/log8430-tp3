@@ -12,3 +12,13 @@
     values: "{{ lookup('file', 'values.yaml') | from_yaml }}"
     set_values:
       - value: replicaCount={{ replicas }}
+
+- name: YCSB
+  ansible.builtin.command:
+    cmd: kubectl run ycsb --attach --rm --restart=Never --image=ycsb:1
+  changed_when: true
+  register: ycsb
+
+- name: Show YCSB
+  ansible.builtin.debug:
+    var: ycsb.stdout_lines

@@ -4,5 +4,8 @@ auth:
   rootUser: root
   rootPassword: password
 
+arbiter:
+  enabled: false
+
 persistence:
   enabled: false

@@ -1,5 +1,5 @@
 {
   "files.associations": {
-    "**/tasks/*.yaml": "ansible"
+    "**/{tasks,handlers}/*.yaml": "ansible"
   }
 }

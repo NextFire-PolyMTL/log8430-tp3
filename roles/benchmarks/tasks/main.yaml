@@ -1,4 +1,16 @@
 ---
+- name: Copy Docker sources
+  ansible.builtin.copy:
+    src: ycsb/
+    dest: ~/ycsb
+    mode: preserve
+  notify:
+    - Build ycsb image
+    - Import image into K3s
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
 - name: Delete previous namespaces
   kubernetes.core.k8s:
     api_version: v1

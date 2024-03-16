@@ -1,12 +1,15 @@
 ---
 - name: Setup Environment
-  hosts: setup
+  hosts: all
+  tags: setup
   become: true
   roles:
     - kubernetes
 
 - name: Run Benchmarks
-  hosts: benchmarks
+  hosts: all
+  tags: benchmarks
+  become: true
   vars_files: variables.yaml
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
