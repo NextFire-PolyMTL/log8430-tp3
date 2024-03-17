@@ -21,7 +21,7 @@ const WORKLOADS = [
 const REPEAT = 10;
 
 async function benchmark() {
-  await Deno.remove("results", { recursive: true }).catch(() => {});
+  await Deno.remove("results", { recursive: true }).catch(undefined);
   await Deno.mkdir("results");
   for (const replicas of REPLICAS) {
     await Deno.mkdir(`results/${replicas}`);
@@ -80,5 +80,9 @@ async function run_benchmark(
 
 if (import.meta.main) {
   $.setPrintCommand(true);
-  await benchmark();
+  try {
+    await benchmark();
+  } finally {
+    await $`./docker-clean.sh`;
+  }
 }
