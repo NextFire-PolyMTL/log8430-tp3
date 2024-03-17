@@ -66,6 +66,10 @@ Vagrant.configure("2") do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = "4"
+    vb.memory = "4096"
+  end
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
@@ -74,4 +78,12 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    apt update
+    apt install -y unzip
+    groupadd docker
+    usermod -aG docker vagrant
+    curl -fsSL https://get.docker.com | sh
+    curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh
+  SHELL
 end
