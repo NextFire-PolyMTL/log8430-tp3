@@ -10,5 +10,6 @@
 ```sh
 vagrant up
 vagrant ssh
-cd /vagrant
+cd /vagrant/
+./benchmark.ts
 ```

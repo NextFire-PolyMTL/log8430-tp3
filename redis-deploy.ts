@@ -6,7 +6,7 @@ export const IMAGE = "redis:7.2.4";
 export const PORT = 6379;
 export const NETWORK = "redis";
 
-async function main(replicas: number) {
+export async function deploy(replicas: number) {
   await $`./docker-clean.sh`;
 
   await $`docker network create ${NETWORK}`.noThrow();
@@ -32,5 +32,5 @@ if (import.meta.main) {
   }
 
   $.setPrintCommand(true);
-  await main(replicas);
+  await deploy(replicas);
 }

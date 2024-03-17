@@ -7,7 +7,7 @@ export const PORT = 27017;
 export const NETWORK = "mongodb";
 export const REPL_SET = "myReplicaSet";
 
-async function main(replicas: number) {
+export async function deploy(replicas: number) {
   await $`./docker-clean.sh`;
 
   await $`docker network create ${NETWORK}`.noThrow();
@@ -53,5 +53,5 @@ if (import.meta.main) {
   }
 
   $.setPrintCommand(true);
-  await main(replicas);
+  await deploy(replicas);
 }
