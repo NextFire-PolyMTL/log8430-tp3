@@ -50,7 +50,7 @@ async function benchmark_redis(replicas: number) {
   console.log(`--- Redis ${replicas} replicas, deploy`);
   await redis.deploy(replicas);
 
-  const config = `-s -p redis.host=redis-0 -p redis.port=${redis.PORT} -p redis.cluster=true`;
+  const config = `-s -p redis.host=redis-0 -p redis.port=${redis.PORT}`;
   await run_benchmark("redis", replicas, redis.NETWORK, config);
 }
 

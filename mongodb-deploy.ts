@@ -35,11 +35,9 @@ export async function deploy(replicas: number) {
 
     const primaryIdx = states.indexOf("PRIMARY");
     if (primaryIdx === -1) {
-      console.debug("Waiting for all members to be ready...", states);
+      console.log("Waiting for all members to be ready...");
       await new Promise((resolve) => setTimeout(resolve, 1000));
     } else {
-      console.log(members);
-      console.log("Primary:", members[primaryIdx].name);
       break;
     }
   }
