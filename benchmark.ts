@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run -A
-import $ from "https://deno.land/x/dax@0.39.2/mod.ts";
+import $ from "dax";
 import * as mongodb from "./mongodb-deploy.ts";
 import * as redis from "./redis-deploy.ts";
 
@@ -21,7 +21,7 @@ const WORKLOADS = [
 const REPEAT = 10;
 
 async function benchmark() {
-  await Deno.remove("results", { recursive: true });
+  await Deno.remove("results", { recursive: true }).catch(() => {});
   await Deno.mkdir("results");
   for (const replicas of REPLICAS) {
     await Deno.mkdir(`results/${replicas}`);

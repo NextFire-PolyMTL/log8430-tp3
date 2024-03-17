@@ -1,12 +1,15 @@
 #!/usr/bin/env -S deno run -A
-// https://www.mongodb.com/compatibility/deploying-a-mongodb-cluster-with-docker
-import $ from "https://deno.land/x/dax@0.39.2/mod.ts";
+import $ from "dax";
 
 export const IMAGE = "mongo:7.0.6";
 export const PORT = 27017;
 export const NETWORK = "mongodb";
 export const REPL_SET = "myReplicaSet";
 
+/**
+ * https://www.mongodb.com/compatibility/deploying-a-mongodb-cluster-with-docker
+ * @param replicas
+ */
 export async function deploy(replicas: number) {
   await $`./docker-clean.sh`;
 

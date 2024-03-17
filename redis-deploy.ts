@@ -1,11 +1,14 @@
 #!/usr/bin/env -S deno run -A
-// https://redis.io/docs/management/replication/
-import $ from "https://deno.land/x/dax@0.39.2/mod.ts";
+import $ from "dax";
 
 export const IMAGE = "redis:7.2.4";
 export const PORT = 6379;
 export const NETWORK = "redis";
 
+/**
+ * https://redis.io/docs/management/replication/
+ * @param replicas
+ */
 export async function deploy(replicas: number) {
   await $`./docker-clean.sh`;
 
