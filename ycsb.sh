@@ -1,4 +1,4 @@
-#!/usr/bin/sh -e
+#!/bin/sh -e
 IMAGE=ghcr.io/jaconi-io/ycsb:0.17.0-latest
 
 NETWORK=$1
