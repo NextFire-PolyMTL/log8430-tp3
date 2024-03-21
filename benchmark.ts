@@ -21,7 +21,7 @@ const WORKLOADS = [
 const REPEAT = 10;
 
 async function benchmark() {
-  await Deno.remove("results", { recursive: true }).catch(undefined);
+  await Deno.remove("results", { recursive: true }).catch(() => {});
   await Deno.mkdir("results");
   for (const replicas of REPLICAS) {
     await Deno.mkdir(`results/${replicas}`);
