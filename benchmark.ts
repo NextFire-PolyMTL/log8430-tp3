@@ -3,7 +3,7 @@ import $ from "dax";
 import * as mongodb from "./mongodb-deploy.ts";
 import * as redis from "./redis-deploy.ts";
 
-const REPLICAS = [3, 5, 7];
+const REPLICAS = [3, 5];
 const WORKLOADS = [
   {
     name: "100_0",
